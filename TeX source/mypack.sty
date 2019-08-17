@@ -1,0 +1,71 @@
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{mypack}
+
+\newcounter{iii}
+\newcounter{pun}[iii]
+
+\newcommand{\ii}[1][\!]{\par \meds \noindent \refstepcounter{iii} \textbf{%
+\arabic{iii}.\textit{\,#1%
+\ifx#1\!%
+{ }%
+\else%
+.%
+\fi%
+}}}
+
+\newcommand{\iinoskip}{\par \noindent \refstepcounter{iii} \textbf{\arabic{iii}.} }
+\newcommand{\pu}{\refstepcounter{pun}{\bf\alph{pun})}\ }
+\newcommand{\Pu}{\par \smalls \refstepcounter{pun}{\bf\alph{pun})}\ }
+
+\newcommand{\iiname}[1]{\par \meds \noindent \textbf{#1.}} %\iiname{\textit{Упражнение}}
+%\newcommand{\iinumname}[1]{\par \meds \noindent \refstepcounter{iii} \textbf{\arabic{iii}.\ \textit{#1.}}}
+
+\newcommand{\gline}{\smalls \noindent \rule{\textwidth}{1pt}}
+\newcommand{\gdotline}
+{
+	\smalls \noindent \makebox[\textwidth][c]
+	{. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .}
+}
+
+\newcommand{\bigs}{\vspace*{\bigskipamount}}
+\newcommand{\meds}{\vspace*{\medskipamount}}
+\newcommand{\smalls}{\vspace*{\smallskipamount}}
+
+\def\dividedby{\smash{\lower.3ex\hbox{$\:\vdots\;$}}}
+
+\newcommand{\rect}[2]{$#1\times#2$}
+\newcommand{\squar}[1]{$#1\times#1$}
+
+\RequirePackage{forloop}
+\newcommand{\repeatsth}[3][]
+{%
+	\newcounter{loop}
+	\forloop{loop}{0}{#2>\value{loop}}
+	{%
+		\ifnum0<\value{loop}{#1}\fi
+		#3
+	}
+}
+
+\newlength{\fsize}
+\newenvironment{cellfigure}[2][0.4]
+{%
+	\setlength{\tabcolsep}{0pt}%
+	\renewcommand{\arraystretch}{#1}%
+	\setlength{\fsize}{\f@size pt}%
+	\newcolumntype{t}{p{#1\fsize}}%
+	\newcommand{\bs}{\multicolumn{1}{|t}{}}%
+	\newcommand{\be}{}%
+	\newcommand{\s}{&\multicolumn{1}{|t}{}}%
+	\newcommand{\e}{&}%	
+	\newcommand{\se}{&\multicolumn{1}{|t}{}\\}%
+	\newcommand{\ee}{&\\}%
+	\renewcommand{\ss}{&\multicolumn{1}{|t|}{}\\}%
+	\newcommand{\es}{&\multicolumn{1}{t|}{}\\}%
+	\begin{tabular}[b]{*{#2}{t}}
+}
+{
+	\end{tabular}
+}
+
+
